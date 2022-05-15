@@ -36,6 +36,9 @@ class Settings(private val context: Context) {
         CONTINUOUS_SCANNING,
         CONFIRM_SCANS_MANUALLY,
         IS_BACK_CAMERA,
+        ENABLE_SEND_TO,
+        AUTOMATICALLY_SEND_TO,
+        IP_ADDRESS,
         SAVE_SCANNED_BARCODES_TO_HISTORY,
         SAVE_CREATED_BARCODES_TO_HISTORY,
         DO_NOT_SAVE_DUPLICATES,
@@ -105,6 +108,18 @@ class Settings(private val context: Context) {
         get() = get(Key.IS_BACK_CAMERA, true)
         set(value) = set(Key.IS_BACK_CAMERA, value)
 
+    var enableSendTo: Boolean
+        get() = get(Key.ENABLE_SEND_TO, false)
+        set(value) = set(Key.ENABLE_SEND_TO, value)
+
+    var automaticallySendTo: Boolean
+        get() = get(Key.AUTOMATICALLY_SEND_TO, false)
+        set(value) = set(Key.AUTOMATICALLY_SEND_TO, value)
+
+    var setIP: String
+        get() = get(Key.IP_ADDRESS, "N/A")
+        set(value) = set(Key.IP_ADDRESS, value)
+
     var saveScannedBarcodesToHistory: Boolean
         get() = get(Key.SAVE_SCANNED_BARCODES_TO_HISTORY, true)
         set(value) = set(Key.SAVE_SCANNED_BARCODES_TO_HISTORY, value)
@@ -149,6 +164,19 @@ class Settings(private val context: Context) {
     private fun set(key: Key, value: Int) {
         return sharedPreferences.edit()
             .putInt(key.name, value)
+            .apply()
+    }
+
+    private fun get(key: Key, default: String = "N/A") : String {
+        var value = sharedPreferences.getString(key.name, default)
+        if (value == null)
+            value = "N/A"
+        return value;
+    }
+
+    private fun set(key: Key, value: String) {
+        return sharedPreferences.edit()
+            .putString(key.name, value)
             .apply()
     }
 

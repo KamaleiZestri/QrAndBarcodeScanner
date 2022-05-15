@@ -242,6 +242,7 @@ class ScanBarcodeFromCameraFragment : Fragment(), ConfirmBarcodeDialogFragment.L
         when {
             settings.confirmScansManually -> showScanConfirmationDialog(barcode)
             settings.saveScannedBarcodesToHistory || settings.continuousScanning -> saveScannedBarcode(barcode)
+            settings.enableSendTo -> sendScannedBarcode(barcode)
             else -> navigateToBarcodeScreen(barcode)
         }
     }
@@ -249,6 +250,7 @@ class ScanBarcodeFromCameraFragment : Fragment(), ConfirmBarcodeDialogFragment.L
     private fun handleConfirmedBarcode(barcode: Barcode) {
         when {
             settings.saveScannedBarcodesToHistory || settings.continuousScanning -> saveScannedBarcode(barcode)
+            settings.enableSendTo -> sendScannedBarcode(barcode)
             else -> navigateToBarcodeScreen(barcode)
         }
     }
@@ -269,6 +271,9 @@ class ScanBarcodeFromCameraFragment : Fragment(), ConfirmBarcodeDialogFragment.L
     }
 
     private fun saveScannedBarcode(barcode: Barcode) {
+        if(settings.enableSendTo)
+            sendScannedBarcode(barcode)
+
         barcodeDatabase.save(barcode, settings.doNotSaveDuplicates)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -281,6 +286,20 @@ class ScanBarcodeFromCameraFragment : Fragment(), ConfirmBarcodeDialogFragment.L
                     }
                 },
                 ::showError
+            )
+            .addTo(disposable)
+    }
+
+    private fun sendScannedBarcode(barcode: Barcode){
+        connectionManager.connectAndSend(settings.setIP, barcode.text)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    showToast(R.string.activity_barcode_send_to_success)
+                },
+                { error ->
+                    showError(error)
+                }
             )
             .addTo(disposable)
     }

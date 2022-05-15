@@ -183,6 +183,12 @@
             android:exported="false"
             />
         <activity
+            android:name=".feature.tabs.settings.connection.IpAddressActivity"
+            android:screenOrientation="fullSensor"
+            android:configChanges="orientation|screenSize"
+            android:exported="false"
+            />
+        <activity
             android:name=".feature.tabs.settings.formats.SupportedFormatsActivity"
             android:screenOrientation="fullSensor"
             android:configChanges="orientation|screenSize"

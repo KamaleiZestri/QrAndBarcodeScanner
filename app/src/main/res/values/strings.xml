@@ -238,6 +238,12 @@
     <string name="fragment_settings_permissions">Permissions</string>
     <string name="fragment_settings_source_code">Source code</string>
     <string name="fragment_settings_app_version">App version</string>
+    <string name="fragment_settings_connection_settings">Connection</string>
+    <string name="fragment_settings_connection_enable">Connect to PC</string>
+    <string name="fragment_settings_connection_enable_hint">Enable sending of scans to PC via IP</string>
+    <string name="fragment_settings_connection_auto_send">Automatically send to PC</string>
+    <string name="fragment_settings_connection_auto_send_hint">Sends after scan confirmation.</string>
+    <string name="fragment_settings_connection_ip">IP Address</string>
 
     <!--Choose theme activity-->
     <string name="activity_choose_theme_title">Theme</string>
@@ -310,6 +316,8 @@
     <string name="activity_barcode_share_as_image">Share as image</string>
     <string name="activity_barcode_save_as_image">Save as image</string>
     <string name="activity_barcode_print">Print</string>
+    <string name="activity_barcode_send_to">Send Via IP</string>
+    <string name="activity_barcode_send_to_success"> Text sent!</string>
     <string name="activity_barcode_delete">Delete</string>
     <string name="activity_barcode_connecting_to_wifi">Connecting…</string>
     <string name="activity_barcode_copied">Copied to clipboard</string>

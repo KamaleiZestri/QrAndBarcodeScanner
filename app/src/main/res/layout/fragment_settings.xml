@@ -132,6 +132,41 @@
                 />
             <View style="@style/DelimiterStyle" />
 
+            <!--Connections-->
+            <TextView
+                android:id="@+id/text_view_connections_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/default_margin_small"
+                android:layout_marginHorizontal="@dimen/default_margin"
+                android:text="@string/fragment_settings_connection_settings"
+                style="@style/SettingsGroupTitleTextViewStyle"
+                />
+            <com.example.barcodescanner.feature.common.view.SettingsButton
+                android:id="@+id/button_enable_connection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:text="@string/fragment_settings_connection_enable"
+                app:hint="@string/fragment_settings_connection_enable_hint"
+                />
+            <com.example.barcodescanner.feature.common.view.SettingsButton
+                android:id="@+id/button_auto_send"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:text="@string/fragment_settings_connection_auto_send"
+                app:hint="@string/fragment_settings_connection_auto_send_hint"
+                />
+            <com.example.barcodescanner.feature.common.view.SettingsButton
+                android:id="@+id/button_input_ip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:text="@string/fragment_settings_connection_ip"
+                app:isSwitchVisible="false"
+                />
+
+            <View style="@style/DelimiterStyle" />
+
             <!--History-->
             <TextView
                 android:layout_width="match_parent"

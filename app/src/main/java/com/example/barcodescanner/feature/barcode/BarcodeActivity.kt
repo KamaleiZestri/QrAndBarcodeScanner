@@ -221,6 +221,7 @@ class BarcodeActivity : BaseActivity(), DeleteConfirmationDialogFragment.Listene
         button_share_as_image.setOnClickListener { shareBarcodeAsImage() }
         button_save_as_image.setOnClickListener { navigateToSaveBarcodeAsImageActivity() }
         button_print.setOnClickListener { printBarcode() }
+        button_send_to.setOnClickListener { sendToConnection() }
     }
 
 
@@ -523,6 +524,20 @@ class BarcodeActivity : BaseActivity(), DeleteConfirmationDialogFragment.Listene
         }
     }
 
+    private fun sendToConnection() {
+        connectionManager.connectAndSend(settings.setIP, barcode.text)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    showToast(R.string.activity_barcode_send_to_success)
+                },
+                { error ->
+                    showError(error)
+                }
+            )
+            .addTo(disposable)
+    }
+
     private fun navigateToBarcodeImageActivity() {
         BarcodeImageActivity.start(this, originalBarcode)
     }
@@ -694,6 +709,7 @@ class BarcodeActivity : BaseActivity(), DeleteConfirmationDialogFragment.Listene
         button_open_bitcoin_uri.isVisible = barcode.bitcoinUri.isNullOrEmpty().not()
         button_open_link.isVisible = barcode.url.isNullOrEmpty().not()
         button_save_bookmark.isVisible = barcode.schema == BarcodeSchema.BOOKMARK
+        button_send_to.isVisible = settings.enableSendTo
     }
 
     private fun showButtonText() {

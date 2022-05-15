@@ -16,6 +16,7 @@ import com.example.barcodescanner.extension.packageManager
 import com.example.barcodescanner.extension.showError
 import com.example.barcodescanner.feature.common.dialog.DeleteConfirmationDialogFragment
 import com.example.barcodescanner.feature.tabs.settings.camera.ChooseCameraActivity
+import com.example.barcodescanner.feature.tabs.settings.connection.IpAddressActivity
 import com.example.barcodescanner.feature.tabs.settings.formats.SupportedFormatsActivity
 import com.example.barcodescanner.feature.tabs.settings.permissions.AllPermissionsActivity
 import com.example.barcodescanner.feature.tabs.settings.search.ChooseSearchEngineActivity
@@ -69,6 +70,8 @@ class SettingsFragment : Fragment(), DeleteConfirmationDialogFragment.Listener {
         button_vibrate.setCheckedChangedListener { settings.vibrate = it }
         button_continuous_scanning.setCheckedChangedListener { settings.continuousScanning = it }
         button_confirm_scans_manually.setCheckedChangedListener { settings.confirmScansManually = it }
+        button_enable_connection.setCheckedChangedListener { settings.enableSendTo = it }
+        button_auto_send.setCheckedChangedListener { settings.automaticallySendTo = it }
         button_save_scanned_barcodes.setCheckedChangedListener { settings.saveScannedBarcodesToHistory = it }
         button_save_created_barcodes.setCheckedChangedListener { settings.saveCreatedBarcodesToHistory = it }
         button_do_not_save_duplicates.setCheckedChangedListener { settings.doNotSaveDuplicates = it }
@@ -79,6 +82,7 @@ class SettingsFragment : Fragment(), DeleteConfirmationDialogFragment.Listener {
         button_choose_theme.setOnClickListener { ChooseThemeActivity.start(requireActivity()) }
         button_choose_camera.setOnClickListener { ChooseCameraActivity.start(requireActivity()) }
         button_select_supported_formats.setOnClickListener { SupportedFormatsActivity.start(requireActivity()) }
+        button_input_ip.setOnClickListener {IpAddressActivity.start(requireActivity())}
         button_clear_history.setOnClickListener { showDeleteHistoryConfirmationDialog() }
         button_choose_search_engine.setOnClickListener { ChooseSearchEngineActivity.start(requireContext()) }
         button_permissions.setOnClickListener { AllPermissionsActivity.start(requireActivity()) }
@@ -114,6 +118,8 @@ class SettingsFragment : Fragment(), DeleteConfirmationDialogFragment.Listener {
             button_vibrate.isChecked = vibrate
             button_continuous_scanning.isChecked = continuousScanning
             button_confirm_scans_manually.isChecked = confirmScansManually
+            button_enable_connection.isChecked = enableSendTo
+            button_auto_send.isChecked = automaticallySendTo
             button_save_scanned_barcodes.isChecked = saveScannedBarcodesToHistory
             button_save_created_barcodes.isChecked = saveCreatedBarcodesToHistory
             button_do_not_save_duplicates.isChecked = doNotSaveDuplicates

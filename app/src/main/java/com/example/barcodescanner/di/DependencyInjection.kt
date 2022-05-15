@@ -46,6 +46,8 @@ val AppCompatActivity.permissionsHelper
 val AppCompatActivity.rotationHelper
     get() = RotationHelper
 
+val AppCompatActivity.connectionManager
+    get() = ConnectionManager
 
 val Fragment.scannerCameraHelper
     get() = ScannerCameraHelper
@@ -58,6 +60,9 @@ val Fragment.barcodeDatabase
 
 val Fragment.settings
     get() = Settings.getInstance(requireContext())
+
+val Fragment.connectionManager
+    get() = ConnectionManager
 
 val Fragment.permissionsHelper
     get() = PermissionsHelper
